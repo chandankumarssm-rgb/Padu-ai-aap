@@ -7,7 +7,7 @@ st.set_page_config(page_title="हमर AI", page_icon="🤖")
 st.title("🤖 हमर पर्सनल AI चैटबॉट")
 
 # एपीआई की (API Key) इनपुट
-api_key = st.secrets.get("GEMINI_API_KEY")
+api_key = st.secrets.get("GEMINI_API_KEY"=AQ.Ab8RN6L6r7uu-asAmEjq2kQJlGn0GBhUsRjaS58ODx_5os9rmA)
 
 # चैट हिस्ट्री खातिर मेमोरी
 if "messages" not in st.session_state:
