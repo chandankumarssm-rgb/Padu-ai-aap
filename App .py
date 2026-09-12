@@ -6,8 +6,8 @@ from google.genai import errors
 st.set_page_config(page_title="हमर AI", page_icon="🤖")
 st.title("🤖 हमर पर्सनल AI चैटबॉट")
 
-# एपीआई की (API Key) इनपुट
-api_key = st.secrets.get("GEMINI_API_KEY"=AQ.Ab8RN6L6r7uu-asAmEjq2kQJlGn0GBhUsRjaS58ODx_5os9rmA)
+# एपीआई की (api key) इनपुट
+api_key = st.sidebar.text_input (GEMINI_API_KEY)
 
 # चैट हिस्ट्री खातिर मेमोरी
 if "messages" not in st.session_state:
@@ -22,7 +22,10 @@ for msg in st.session_state.messages:
 user_prompt = st.chat_input("कुछू पूछीं...")
 
 if user_prompt:
-# यूज़र के सवाल स्क्रीन पर देखावे खातिर
+    if not api_key:
+        st.warning("कृप्या साइडबार में आपन API Key डालीं!")
+    else:
+        # यूज़र के सवाल स्क्रीन पर देखावे खातिर
         st.session_state.messages.append({"role": "user", "content": user_prompt})
         with st.chat_message("user"):
             st.write(user_prompt)
@@ -32,8 +35,7 @@ if user_prompt:
             try:
                 client = genai.Client(api_key=api_key)
                 response = client.models.generate_content(
-                    model="gemini-1.5-pro",
-
+                    model="gemini-3.5-flash",
                     contents=user_prompt,
                 )
                 bot_reply = response.text
@@ -43,3 +45,4 @@ if user_prompt:
                 st.error("API सीमा भा नेटवर्क एरर आइल बा, कुछ देर बाद दोबारा कोशिश करीं।")
             except Exception as e:
                 st.error(f"कवनो अनजान समस्या आइल: {e}")
+
