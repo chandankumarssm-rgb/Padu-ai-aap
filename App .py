@@ -22,10 +22,7 @@ for msg in st.session_state.messages:
 user_prompt = st.chat_input("कुछू पूछीं...")
 
 if user_prompt:
-    if not api_key:
-        st.warning("कृप्या साइडबार में आपन API Key डालीं!")
-    else:
-        # यूज़र के सवाल स्क्रीन पर देखावे खातिर
+# यूज़र के सवाल स्क्रीन पर देखावे खातिर
         st.session_state.messages.append({"role": "user", "content": user_prompt})
         with st.chat_message("user"):
             st.write(user_prompt)
